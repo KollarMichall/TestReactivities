@@ -4,11 +4,11 @@ import { Button, Card, Image } from "semantic-ui-react";
 
 interface ActivityDetailsProps {
     activity: Activity;
-    cancelSelectAktivity: () => void;
+    cancelSelectActivity: () => void;
     openForm: (id: string) => void;
 }
 
-const ActivityDetails: FunctionComponent<ActivityDetailsProps> = ({ activity, cancelSelectAktivity, openForm}: ActivityDetailsProps) => {
+const ActivityDetails: FunctionComponent<ActivityDetailsProps> = ({ activity, cancelSelectActivity, openForm}: ActivityDetailsProps) => {
     return (
         <Card fluid>
             <Image src={`/assets/categoryImages/${activity.category}.jpg`} alt={'img'}/>
@@ -24,7 +24,7 @@ const ActivityDetails: FunctionComponent<ActivityDetailsProps> = ({ activity, ca
             <Card.Content extra>
                 <Button.Group widths={2}>
                     <Button onClick={() => openForm(activity.id)}basic color="blue" content="Edit" />
-                    <Button onClick={cancelSelectAktivity} basic color="grey" content="Cancel" />
+                    <Button onClick={cancelSelectActivity} basic color="grey" content="Cancel" />
                 </Button.Group>
             </Card.Content>
         </Card>

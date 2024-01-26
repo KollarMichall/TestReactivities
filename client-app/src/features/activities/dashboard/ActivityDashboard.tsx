@@ -6,24 +6,25 @@ import ActivityForm from "../form/ActivityForm";
 interface Props{
     activities: Activity[];
     selectedActivity: Activity | undefined;
-    selectAktivity: (id: string) => void;
-    cancelSelectAktivity: () => void;
+    selectActivity: (id: string) => void;
+    cancelSelectActivity: () => void;
     editMode: boolean;
     openForm: (id: string) => void;
     closeForm: () => void;
     createOrEdit: (activity: Activity) => void
+    deleteActivity: (id: string) => void
 }
-function ActivityDashboard({activities, selectedActivity, selectAktivity, cancelSelectAktivity, editMode, openForm, closeForm, createOrEdit} : Props) {
+function ActivityDashboard({activities, selectedActivity, selectActivity, cancelSelectActivity, editMode, openForm, closeForm, createOrEdit, deleteActivity} : Props) {
     return (
         <Grid>
             <Grid.Column width={10}>
-            <ActivityList activities={activities}
-            selectAktivity={selectAktivity}
+            <ActivityList deleteActivity={deleteActivity} activities={activities}
+            selectActivity={selectActivity}
             />
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedActivity && !editMode &&
-                <ActivityDetails activity={selectedActivity} cancelSelectAktivity={cancelSelectAktivity} openForm={openForm}/>}
+                <ActivityDetails activity={selectedActivity} cancelSelectActivity={cancelSelectActivity} openForm={openForm}/>}
                 {editMode &&
                     <ActivityForm activity={selectedActivity} closeForm={closeForm} createOrEdit={createOrEdit}/>
                 }
