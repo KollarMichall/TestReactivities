@@ -11,22 +11,24 @@ interface Props{
     editMode: boolean;
     openForm: (id: string) => void;
     closeForm: () => void;
-    createOrEdit: (activity: Activity) => void
-    deleteActivity: (id: string) => void
+    createOrEdit: (activity: Activity) => void;
+    deleteActivity: (id: string) => void;
+    submitting: boolean;
 }
-function ActivityDashboard({activities, selectedActivity, selectActivity, cancelSelectActivity, editMode, openForm, closeForm, createOrEdit, deleteActivity} : Props) {
+function ActivityDashboard({activities, selectedActivity, selectActivity, cancelSelectActivity, editMode, openForm, closeForm, createOrEdit, deleteActivity, submitting} : Props) {
     return (
         <Grid>
             <Grid.Column width={10}>
             <ActivityList deleteActivity={deleteActivity} activities={activities}
             selectActivity={selectActivity}
+            submitting={submitting}
             />
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedActivity && !editMode &&
-                <ActivityDetails activity={selectedActivity} cancelSelectActivity={cancelSelectActivity} openForm={openForm}/>}
+                <ActivityDetails activity={selectedActivity} cancelSelectActivity={cancelSelectActivity} openForm={openForm} />}
                 {editMode &&
-                    <ActivityForm activity={selectedActivity} closeForm={closeForm} createOrEdit={createOrEdit}/>
+                    <ActivityForm activity={selectedActivity} closeForm={closeForm} createOrEdit={createOrEdit} submitting={submitting}/>
                 }
             </Grid.Column>
         </Grid>

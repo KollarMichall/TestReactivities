@@ -6,9 +6,10 @@ interface ActivityFormProps {
   activity: Activity | undefined;
   closeForm: () => void;
   createOrEdit: (activity: Activity) => void;
+  submitting: boolean;
 }
 
-function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit}: ActivityFormProps) {
+function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit, submitting}: ActivityFormProps) {
     const inicialize = selectedActivity ?? {
         id: '',
         title: '',
@@ -52,6 +53,7 @@ function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit}: Ac
           placeholder="Category"
         />
         <Form.Input
+        type='date'
           name="date"
           value={activity.date}
           onChange={handleInputChange}
@@ -69,7 +71,7 @@ function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit}: Ac
           onChange={handleInputChange}
           placeholder="Venue"
         />
-        <Button floated="right" positive type="submit" content="Submit" />
+        <Button loading={submitting} floated="right" positive type="submit" content="Submit" />
         <Button onClick={closeForm} floated="right" type="button" content="Cancel" />
       </Form>
     </Segment>

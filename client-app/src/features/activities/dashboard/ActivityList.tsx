@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { Activity } from "../../../app/models/activity";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 
@@ -6,8 +6,14 @@ interface ActivityListProps {
     activities: Activity[];   
     selectActivity: (id: string) => void;
     deleteActivity: (id: string) => void;
+    submitting: boolean
 }
-const ActivityList: FunctionComponent<ActivityListProps> = ({ activities, selectActivity, deleteActivity}: ActivityListProps) => {
+const ActivityList: FunctionComponent<ActivityListProps> = ({ activities, selectActivity, deleteActivity, submitting}: ActivityListProps) => {
+    const [target, setTarget] = useState('');
+    const handleDeleteActivity = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+        setTarget(e.currentTarget.name)
+        deleteActivity(id);
+    }
     return (
         <Segment>
             <Item.Group divided>
@@ -24,7 +30,8 @@ const ActivityList: FunctionComponent<ActivityListProps> = ({ activities, select
                             </Item.Description>
                             <Item.Extra>
                                 <Button onClick={() => selectActivity(activity.id)} floated="right" content="View" color="blue" />
-                                <Button onClick={() => deleteActivity(activity.id)} floated="right" content="Delete" color="red" />
+                                <Button name={activity.id} loading={submitting && target == activity.id} 
+                                onClick={(e) => handleDeleteActivity(e, activity.id)} floated="right" content="Delete" color="red" />
                                 <Label basic content={activity.category} />
                             </Item.Extra>
                         </Item.Content>
@@ -36,3 +43,5 @@ const ActivityList: FunctionComponent<ActivityListProps> = ({ activities, select
 }
 
 export default ActivityList;
+
+
