@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
 import { Activity } from "../../../app/models/activity";
-import { Button, Icon, Item, Segment } from "semantic-ui-react";
+import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import ActivityListItemAttendee from "./ActivityListItemAttendee";
 
 interface ActivityListItemProps {
     activity: Activity;
@@ -13,6 +14,9 @@ const ActivityListItem: FunctionComponent<ActivityListItemProps> = ({activity}: 
     return ( 
         <Segment.Group>
             <Segment>
+            {activity.isCancelled &&
+                    <Label attached='top' color='red' content='Cancelled' style={{ textAlign: 'center' }} />}
+              
                 <Item.Group>
                     <Item>
                         <Item.Image size="tiny" circular src='/assets/user.png' alt="user"/>
@@ -20,7 +24,21 @@ const ActivityListItem: FunctionComponent<ActivityListItemProps> = ({activity}: 
                             <Item.Header as={Link} to={`/activities/${activity.id}`}>
                                 {activity.title}
                             </Item.Header>
-                            <Item.Description>Hosted by KolliM</Item.Description>
+                            <Item.Description>Hosted by <Link to={`/profiles/${activity.hostUsername}`}>{activity.host?.displayName}</Link></Item.Description>
+                            {activity.isHost && (
+                                <Item.Description>
+                                    <Label basic color='orange'>
+                                        You are hosting this activity!
+                                    </Label>
+                                </Item.Description>
+                            )}
+                            {activity.isGoing && !activity.isHost && (
+                                <Item.Description>
+                                    <Label basic color='green'>
+                                        You are going to this activity!
+                                    </Label>
+                                </Item.Description>
+                            )}
                         </Item.Content>
                     </Item>
                 </Item.Group>
@@ -30,7 +48,7 @@ const ActivityListItem: FunctionComponent<ActivityListItemProps> = ({activity}: 
                 <Icon name="marker"/> {activity.venue}
             </Segment>
             <Segment secondary>
-                Attendees go here
+               <ActivityListItemAttendee attendees={activity.attendees!}/>
             </Segment>
             <Segment clearing>
                 <span>{activity.description}</span>
