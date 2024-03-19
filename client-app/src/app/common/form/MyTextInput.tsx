@@ -6,6 +6,7 @@ interface MyTextInputProps {
     placeholder: string;
     name: string;
     label?: string;
+    type?: string;
 }
  
 const MyTextInput: FunctionComponent<MyTextInputProps> = (props: MyTextInputProps) => {
