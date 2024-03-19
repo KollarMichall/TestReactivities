@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Services;
+using Application.Interfaces;
 using Domain;
+using Infrastructure.Photos;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -44,7 +46,8 @@ namespace API.Extensions
             });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
             services.AddScoped<TokenService>();
-
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+    services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             return services;
         }
     }
