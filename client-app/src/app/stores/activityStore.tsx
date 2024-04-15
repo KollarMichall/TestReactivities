@@ -1,6 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { Activity, ActivityFormValues } from "../models/activity";
-import {v4 as uuid} from 'uuid';
 import agent from "../api/agent";
 import { format } from "date-fns";
 import {store} from "./store";
@@ -168,6 +167,9 @@ const updatedActivity = {...this.getActivity(activity.id), ...activity};
         } finally{
             runInAction(() => this.loading = false);
         }
+    }
+    clearSelectedActivity = () => {
+        this.selectedActivity = undefined;
     }
 }
 

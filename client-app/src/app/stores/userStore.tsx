@@ -47,6 +47,17 @@ class UserStore {
             
         }
     }
+    setImage = async (image: string) => {
+        try {
+          if(this.user) this.user.image = image;
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+    setDisplayName = (name: string) => {
+        if (this.user) this.user.displayName = name;
+}
 }
  
 export default UserStore;

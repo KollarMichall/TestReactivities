@@ -11,7 +11,7 @@ const ActivityList: FunctionComponent = () => {
     return (
         <>
             {groupedAcitivies.map(([group, activities]) => (
-                <Fragment>
+                <Fragment key={group}>
                     <Header sub color="teal">
                         {group}
                     </Header>

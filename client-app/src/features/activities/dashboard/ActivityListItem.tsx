@@ -19,7 +19,7 @@ const ActivityListItem: FunctionComponent<ActivityListItemProps> = ({activity}: 
               
                 <Item.Group>
                     <Item>
-                        <Item.Image size="tiny" circular src='/assets/user.png' alt="user"/>
+                        <Item.Image size="tiny" circular src={activity.host?.image || '/assets/user.png'} alt="user"/>
                         <Item.Content>
                             <Item.Header as={Link} to={`/activities/${activity.id}`}>
                                 {activity.title}

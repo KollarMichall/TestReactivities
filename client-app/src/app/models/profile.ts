@@ -5,6 +5,7 @@ displayName: string;
 username: string;
 image?: string;
 bio?:string;
+photos?: Photo[];
 }
 export class Profile implements IProfile{
 
@@ -18,4 +19,11 @@ constructor(user: User) {
     username: string;
     image?: string | undefined;
     bio?: string | undefined;
+    photos?: Photo[];
+
+}
+export interface Photo {
+    id: string;
+    url: string;
+    isMain: boolean;
 }

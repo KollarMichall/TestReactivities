@@ -75,7 +75,7 @@ namespace API.Controllers
                     DisplayName = user.DisplayName,
                     Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
                     Token = _tokenService.CeateToken(user),
-                    UserName = user.UserName
+                    Username = user.UserName
                 };
         }
     }
