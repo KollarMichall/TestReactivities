@@ -3,6 +3,7 @@ import { Profile } from "../../app/models/profile";
 import { observer } from "mobx-react-lite";
 import { Card, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import FollowButton from "./FollowButton";
 
 interface ProfileCardProps {
     profile: Profile
@@ -21,8 +22,9 @@ const ProfileCard: FunctionComponent<ProfileCardProps> = ({profile}: ProfileCard
 </Card.Content>
 <Card.Content extra>
     <Icon name="user"/>
-    20 followers
+    {profile.followersCount} followers
 </Card.Content>
+<FollowButton profile={profile}/>
     </Card> );
 }
  

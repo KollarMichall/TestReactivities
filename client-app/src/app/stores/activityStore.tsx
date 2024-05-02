@@ -171,5 +171,15 @@ const updatedActivity = {...this.getActivity(activity.id), ...activity};
     clearSelectedActivity = () => {
         this.selectedActivity = undefined;
     }
+    updateAttendeeFollowing = (username: string) => {
+        this.activitiesRegistry.forEach((activity: Activity) => {
+            activity.attendees.forEach((attendee: Profile) => {
+                if(attendee.username === username){
+                    attendee.following ? attendee.followersCount-- : attendee.followersCount++;
+                    attendee.following = !attendee.following;
+                }
+            })
+        })
+    }
 }
 

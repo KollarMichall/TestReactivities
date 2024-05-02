@@ -58,7 +58,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                                                     isValid && handleSubmit();
                                                 }
                                             }}
-                                        />
+                                            />
                                     </div>
                                 )}
                             </Field>
