@@ -23,7 +23,7 @@ const ProfilePage: FunctionComponent<ProfilePageProps> = () => {
        }
     }, [loadProfile, username, setActiveTab]);
 
-    // if (loadingProfile)  return <LoadingComponent inverted content='Loading profile...' />
+    //if (loadingProfile)  return <LoadingComponent inverted content='Loading profile...' />
 
     return ( 
         <Grid>
